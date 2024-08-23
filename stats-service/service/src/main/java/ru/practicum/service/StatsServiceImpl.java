@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.practicum.HitDto;
 import ru.practicum.StatsDto;
+import ru.practicum.exception.ValidationException;
 import ru.practicum.mapper.HitMapper;
 import ru.practicum.repository.StatsRepository;
 
@@ -23,6 +24,9 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public List<StatsDto> getStats(LocalDateTime start, LocalDateTime end, List<String> uris, boolean unique) {
+        if (start.isAfter(end)) {
+            throw new ValidationException("Неверные параметры start и end");
+        }
         if (unique) {
             if (uris != null) {
                 return repository.getWithUriUnique(start, end, uris);
