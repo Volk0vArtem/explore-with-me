@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.Length;
-import ru.practicum.admin.users.model.User;
+import ru.practicum.admin.users.model.UserShortDto;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +19,6 @@ public class CommentDto {
     @Length(min = 10, max = 280)
     private String text;
     private Long eventId;
-    private User user;
+    private UserShortDto user;
     private String created;
 }
