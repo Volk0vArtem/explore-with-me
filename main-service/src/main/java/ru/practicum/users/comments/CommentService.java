@@ -40,6 +40,8 @@ public class CommentService {
     }
 
     public CommentDto patchComment(Long userId, Long commentId, CommentDto commentDto) {
+        userRepository.findById(userId).
+                orElseThrow(() -> new NotFoundException("User with id " + userId + " not found."));
         Comment comment = getCommentById(commentId, userId);
         comment.setText(commentDto.getText());
         return commentMapper.toCommentDto(commentRepository.save(comment));

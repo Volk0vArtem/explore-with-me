@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.practicum.users.comments.model.CommentDto;
 
@@ -37,6 +38,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{userId}/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteComment(@PathVariable("userId") Long userId,
                               @PathVariable("commentId") Long commentId) {
         service.deleteComment(userId, commentId);
