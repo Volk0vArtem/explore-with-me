@@ -48,6 +48,8 @@ public class CommentService {
     }
 
     public void deleteComment(Long userId, Long commentId) {
+        userRepository.findById(userId).
+                orElseThrow(() -> new NotFoundException("User with id " + userId + " not found."));
         commentRepository.deleteById(getCommentById(commentId, userId).getId());
     }
 

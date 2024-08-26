@@ -54,6 +54,53 @@
 			"response": []
 		},
 		{
+			"name": "comment second",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 201  и данные в формате json\", function () {",
+							"    pm.response.to.have.status(201);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"text\": \"comment text\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/comments/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"comments",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "comment user not found",
 			"event": [
 				{
@@ -423,6 +470,52 @@
 			"response": []
 		},
 		{
+			"name": "comment not author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400\", ",
+							"    function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"text\": \"patched text\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/comments/2/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"comments",
+						"2",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "comment empty",
 			"event": [
 				{
@@ -630,7 +723,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"text\": \"still testing\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -679,7 +772,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"text\": \"still testing\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -698,6 +791,55 @@
 						"comments",
 						"999",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "commentsByEvent event not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404\", ",
+							"    function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/comments/1/999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"comments",
+						"1",
+						"999"
 					]
 				}
 			},
@@ -729,7 +871,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"text\": \"still testing\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -747,6 +889,54 @@
 						"admin",
 						"comments",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "commentsByUser not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 404\", ",
+							"    function () {",
+							"    pm.response.to.have.status(404);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/admin/comments/999",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"comments",
+						"999"
 					]
 				}
 			},
@@ -773,7 +963,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"text\": \"still testing\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -792,6 +982,51 @@
 						"comments",
 						"1",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "comment not author",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Ответ должен содержать код статуса 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/comments/2/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"comments",
+						"2",
+						"2"
 					]
 				}
 			},
@@ -818,7 +1053,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"text\": \"still testing\"\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -826,7 +1061,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/admin/comments/1",
+					"raw": "http://localhost:8080/admin/comments/2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -835,7 +1070,7 @@
 					"path": [
 						"admin",
 						"comments",
-						"1"
+						"2"
 					]
 				}
 			},
