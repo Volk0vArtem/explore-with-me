@@ -23,8 +23,8 @@ public class CommentAdminService {
     private final CommentMapper commentMapper;
 
     public List<CommentDto> getCommentsByUser(Long userId) {
-        User user = userRepository.findById(userId).
-                orElseThrow(() -> new NotFoundException("User with id " + userId + " not found."));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("User with id " + userId + " not found."));
         return commentRepository.getCommentsByUser(user).stream()
                 .map(commentMapper::toCommentDto)
                 .collect(Collectors.toList());
