@@ -18,9 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/events")
 @RequiredArgsConstructor
-public class AdminEventController {
+public class EventAdminController {
 
-    private final AdminEventService adminEventService;
+    private final EventAdminService eventAdminService;
 
     @GetMapping
     public ResponseEntity<List<EventFullDto>> getEvents(@RequestParam(required = false) List<Long> users,
@@ -31,11 +31,11 @@ public class AdminEventController {
                                                         @RequestParam(defaultValue = "0") Integer from,
                                                         @RequestParam(defaultValue = "10") Integer size) {
         return ResponseEntity.ok()
-                .body(adminEventService.getEvents(users, states, categories, rangeStart, rangeEnd, from, size));
+                .body(eventAdminService.getEvents(users, states, categories, rangeStart, rangeEnd, from, size));
     }
 
     @PatchMapping("{eventId}")
     public ResponseEntity<EventFullDto> updateEvent(@PathVariable Long eventId, @Valid @RequestBody UpdateEventAdminRequest event) {
-        return ResponseEntity.ok().body(adminEventService.updateEvent(eventId, event));
+        return ResponseEntity.ok().body(eventAdminService.updateEvent(eventId, event));
     }
 }
