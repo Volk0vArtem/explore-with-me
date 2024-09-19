@@ -13,7 +13,7 @@
 
 ## Стек технологий
 
-- **Java 11**
+- **Java 21**
 - **Spring Boot**
 - **Hibernate** / **JPA**
 - **PostgreSQL** для хранения данных
